@@ -15,9 +15,20 @@ body {
     width: 30rem;
 }
 
+.quiz-answer-card:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.2);
+
+}
+
 .question-footer {
     border-top: 1px solid rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: space-between;
     padding-top: 12px;
+}
+
+.bg-succes,
+.bg-danger {
+    color: white;
 }
