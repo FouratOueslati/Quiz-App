@@ -4,8 +4,7 @@ body {
 
 
 .container {
-    min-height: 100vh;
-    background-color: #3D928C !important;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,4 +49,14 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 24px;
+}
+
+@media (max-width: 510px) {
+    .quiz-card {
+        height: 100%;
+    }
+
+    .container {
+        padding: unset;
+    }
 }

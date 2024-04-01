@@ -33,10 +33,10 @@ let questions = [
 let rightQuestions = 0;
 let currentQuestion = 0;
 
-let audio_right = new Audio('right.mp3');
-let audio_wrong = new Audio('wrong.mp3');
-let audio_success = new Audio('success.mp3');
-let audio_fail = new Audio('fail.mp3');
+let audio_right = new Audio('./music/right.mp3');
+let audio_wrong = new Audio('./music/wrong.mp3');
+let audio_success = new Audio('./music/success.mp3');
+let audio_fail = new Audio('./music/fail.mp3');
 
 
 function init() {
@@ -48,7 +48,7 @@ function init() {
 function showQuestion() {
     if (gameIsOver()) {
         showEndScreen();
-        endSound();
+        endSoundAndPicture();
     } else {
         updateProgressBar()
         goToNextQuestion();
@@ -67,7 +67,20 @@ function showEndScreen() {
     document.getElementById('question-body').style = 'display: none;';
     document.getElementById('amount-of-questions').innerHTML = questions.length;
     document.getElementById('amount-of-right-answers').innerHTML = rightQuestions;
-    document.getElementById('header-img').src = './img/trophy.png';
+}
+
+
+function endSoundAndPicture() {
+    // plays a different sound and shows a different picture depending on the situation
+    let rightAnswers = document.getElementById('amount-of-right-answers').innerHTML;
+    let allQuestions = document.getElementById('amount-of-questions').innerHTML;
+    if (rightAnswers >= (allQuestions / 2 + 1)) {
+        document.getElementById('header-img').src = './img/trophy.png';
+        audio_success.play();
+    } else {
+        document.getElementById('header-img').src = './img/fail.jpg';
+        audio_fail.play();
+    }
 }
 
 
@@ -136,15 +149,4 @@ function restartQuiz() {
     rightQuestions = 0;
     currentQuestion = 0;
     init();
-}
-
-
-function endSound() {
-    let rightAnswers = document.getElementById('amount-of-right-answers').innerHTML;
-    let allQuestions = document.getElementById('amount-of-questions').innerHTML;
-    if (rightAnswers >= (allQuestions / 2 + 1)) {
-        audio_success.play();
-    } else {
-        audio_fail.play();
-    }
 }
