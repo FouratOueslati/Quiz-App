@@ -30,6 +30,8 @@ let questions = [
     }
 ];
 
+let rightQuestions = 0;
+
 let currentQuestion = 0;
 
 function init() {
@@ -39,13 +41,24 @@ function init() {
 
 
 function showQuestion() {
-    let question = questions[currentQuestion];
-    document.getElementById('number-current-question').innerHTML = currentQuestion + 1;
-    document.getElementById('questionText').innerHTML = question['question'];
-    document.getElementById('answer_1').innerHTML = question['answer_1'];
-    document.getElementById('answer_2').innerHTML = question['answer_2'];
-    document.getElementById('answer_3').innerHTML = question['answer_3'];
-    document.getElementById('answer_4').innerHTML = question['answer_4'];
+
+    if (currentQuestion >= questions.length) {
+        document.getElementById('end-screen').style = '';
+        document.getElementById('question-body').style = 'display: none;';
+
+        document.getElementById('amount-of-questions').innerHTML = questions.length;
+        document.getElementById('amount-of-right-answers').innerHTML = rightQuestions;
+    } else {
+
+        let question = questions[currentQuestion];
+
+        document.getElementById('number-current-question').innerHTML = currentQuestion + 1;
+        document.getElementById('questionText').innerHTML = question['question'];
+        document.getElementById('answer_1').innerHTML = question['answer_1'];
+        document.getElementById('answer_2').innerHTML = question['answer_2'];
+        document.getElementById('answer_3').innerHTML = question['answer_3'];
+        document.getElementById('answer_4').innerHTML = question['answer_4'];
+    }
 }
 
 
@@ -57,6 +70,7 @@ function answer(answer) {
 
     if (selectedAnswerNumber == question['right_answer']) {
         document.getElementById(answer).parentNode.classList.add('bg-success');
+        rightQuestions++;
     } else {
         document.getElementById(answer).parentNode.classList.add('bg-danger');
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
